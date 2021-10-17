@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31825.309
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{6A3BFD37-C6D8-4127-A473-CEA1BB9657EC}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		paket.dependencies = paket.dependencies
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "TiraxNotion", "TiraxNotion\TiraxNotion.fsproj", "{11F08DF8-B09B-4141-B04D-20AC50C2FB09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11F08DF8-B09B-4141-B04D-20AC50C2FB09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11F08DF8-B09B-4141-B04D-20AC50C2FB09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11F08DF8-B09B-4141-B04D-20AC50C2FB09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11F08DF8-B09B-4141-B04D-20AC50C2FB09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E249F90-936D-4531-8AF6-B7E53E942440}
+	EndGlobalSection
+EndGlobal
