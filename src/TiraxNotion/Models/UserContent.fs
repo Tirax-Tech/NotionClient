@@ -2,6 +2,7 @@
 
 open System.Collections.Generic
 open System.Text.Json.Serialization
+open System.Text.Json
 
 type User = {
     Id: string
@@ -11,35 +12,6 @@ type User = {
     OnboardingCompleted: bool
     MobileOnboardingCompleted: bool
     Name: string
-}
-
-type UserPermission = {
-    Role: string
-    Type: string
-    UserId: string
-}
-
-type PermissionGroup = {
-    Id: string
-    Name: string
-    UserIds: string list
-}
-
-type Space = {
-    Id: string
-    Version: int
-    Name: string
-    Permissions: UserPermission list
-    PermissionGroup: PermissionGroup list
-    Icon: string
-    BetaEnabled: bool
-    Pages: string list
-    DisablePublicAccess: bool
-    DisableGuests: bool
-    DisableMoveToSpace: bool
-    DisableExport: bool
-    PlanType: string
-    InviteLinkEnabled: bool
 }
 
 type UserSettings = {
@@ -66,19 +38,18 @@ type UserSettingItem = {
     Settings: UserSettings
 }
 
-type PermissionItem<'T> = {
-    Role: string
-    Value: 'T
-}
-
-type PermissionObjects<'T> = Map<string, PermissionItem<'T>>
-
+[<NoComparison>]
 type UserContentRecordMap = {
     NotionUser: PermissionObjects<User>
-    Space: PermissionObjects<Space>
+    UserRoot: JsonElement
     UserSettings: PermissionObjects<UserSettingItem>
+    Space: PermissionObjects<Space>
+    SpaceView: JsonElement
+    Block: JsonElement
+    Collection: JsonElement
 }
 
+[<NoComparison>]
 type UserContent = {
     [<JsonPropertyName("recordMap")>] RecordMap: UserContentRecordMap
 }

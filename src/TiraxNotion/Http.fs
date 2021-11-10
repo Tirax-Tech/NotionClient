@@ -6,6 +6,8 @@ open System.Net
 open System.Net.Http
 open System.Net.Http.Json
 open System.Text.Json
+open System.IO
+open System.Net.Http.Headers
 
 type HttpStatusCode with
     member me.IsInformational = let code = int(me) in code >= 100 && code < 200
@@ -50,10 +52,10 @@ exception HttpRequestUnhandled of HttpStatusCode * string
 /// Read content from HttpResponseMessage as JSON and deserialize to 'Response.
 // JsonSerializerOptions -> HttpResponseMessage -> Task<struct (HttpStatusCode * 'Response)>
 let jsonResponseWithOptions<'Response> (opt: JsonSerializerOptions) (res: HttpResponseMessage) =
-    if not res.IsSuccessStatusCode then
-        raise <| HttpRequestUnhandled (res.StatusCode, $"Status code is not OK! (%A{res.StatusCode})")
-    else
+    if res.IsSuccessStatusCode then
         res |> respondWith (fun content -> content.ReadFromJsonAsync<'Response>(opt))
+    else
+        raise <| HttpRequestUnhandled (res.StatusCode, $"Status code is not OK! (%A{res.StatusCode})")
 
 (* HttpResponseMessage -> Task<struct (HttpStatusCode * 'Response)> *)
 let inline jsonResponse<'Response> = jsonResponseWithOptions<'Response> <| DefaultCamelSerializerOptions
@@ -75,8 +77,13 @@ with
         Headers=[]
         Content=None
     }
-    member me.WithHeaders([<ParamArray>] headers: HttpHeaders[]) = { me with Headers=headers }
-    member me.WithJson body = { me with Content=Some (JsonContent.Create body) }
+    member inline me.WithHeaders([<ParamArray>] headers: HttpHeaders[]) = { me with Headers=headers }
+    member me.WithJson(body, ?serializer: JsonSerializerOptions) =
+        let text = JsonSerializer.Serialize(body, ?options = serializer)
+        let payload = MemoryStream(Text.Encoding.UTF8.GetBytes text)
+        let content = StreamContent(payload)
+        content.Headers.ContentType <- MediaTypeHeaderValue("application/json")
+        { me with Content=Some content }
     member my.Respond() =
         let req = HttpRequestMessage(my.Method, my.Uri)
         my.Headers |> Seq.iter (setHeader req)
