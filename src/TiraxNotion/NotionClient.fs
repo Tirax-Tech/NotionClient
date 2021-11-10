@@ -12,10 +12,11 @@ let private SignedUrlPrefix = BaseUri.ChangePath("/signed")
 let private S3UrlPrefix = Uri.Https.Host("s3-us-west-2.amazonaws.com").ChangePath("secure.notion-static.com")
 let private S3UrlPrefixEncoded = Uri.Https.Host("s3.us-west-2.amazonaws.com").ChangePath("secure.notion-static.com")
 
-let private DefaultSerializerOptions = JsonSerializerOptions(
+let SnakeCase = JsonSerializerOptions(
     PropertyNameCaseInsensitive = true,
     PropertyNamingPolicy=JsonSnakeCaseNamingPolicy()
     )
+let CamelCase = JsonSerializerOptions(PropertyNameCaseInsensitive = true)
 
 /// Notion client's context.  All members are subjected to change in the future.
 type NotionContext(tokenV2: string) =
@@ -29,13 +30,13 @@ type NotionContext(tokenV2: string) =
                      | None -> request
         poster.Respond()
 
-    member my.Post<'Data>(endpoint, ?data) =
+    member my.Post<'Data>(endpoint, serializer, ?data) =
         task {
             use! res = my.PostRaw(endpoint, ?data = data)
-            return! res |> jsonResponseWithOptions<'Data>(DefaultSerializerOptions)
+            return! res |> jsonResponseWithOptions<'Data>(serializer)
         }
 
-    member inline my.LoadUserContent<'T>() = my.Post<'T>("loadUserContent")
+    member my.LoadUserContent<'T>(?serializer) = my.Post<'T>("loadUserContent", serializer |> Option.defaultWith (fun _ -> SnakeCase))
     member inline my.LoadUserContent() = my.LoadUserContent<UserContent>()
     
 /// <summary>
