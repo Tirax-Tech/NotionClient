@@ -3,47 +3,37 @@
 open System.Text.Json
 
 type UserPermission = {
-    Role: string
-    Type: string
-    UserId: string
+    role: string
+    ``type``: string
+    user_id: string
 }
 
 type PermissionGroup = {
-    Id: string
-    Name: string
-    UserIds: string list
+    id: string
+    name: string
+    user_ids: string list
 }
 
 type Space = {
-    Id: string
-    Version: int
-    Name: string
-    Permissions: UserPermission list
-    PermissionGroup: PermissionGroup list
-    Icon: string
-    BetaEnabled: bool
-    Pages: string list
-    DisablePublicAccess: bool
-    DisableGuests: bool
-    DisableMoveToSpace: bool
-    DisableExport: bool
-    PlanType: string
-    InviteLinkEnabled: bool
+    id: string
+    version: int
+    name: string
+    permissions: UserPermission list
+    permission_group: PermissionGroup list
+    icon: string
+    beta_enabled: bool
+    pages: string list
+    disable_public_access: bool
+    disable_guests: bool
+    disable_move_to_space: bool
+    disable_export: bool
+    plan_type: string
+    invite_link_enabled: bool
 }
 
 type PermissionItem<'T> = {
-    Role: string
-    Value: 'T
+    role: string
+    value: 'T
 }
 
 type PermissionObjects<'T> = Map<string, PermissionItem<'T>>
-
-type RecordMapBase(space: PermissionObjects<Space>, block: JsonElement, collection: JsonElement) =
-    member _.Space = space
-    member _.Block = block
-    member _.Collection = collection
-
-[<NoComparison>]
-type RecordMap<'T when 'T :> RecordMapBase> = {
-    RecordMap: 'T
-}

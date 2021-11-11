@@ -1,55 +1,53 @@
 ﻿namespace TiraxTech.Notion.Models
 
-open System.Collections.Generic
-open System.Text.Json.Serialization
 open System.Text.Json
 
 type User = {
-    Id: string
-    Version: int
-    Email: string
-    ProfilePhoto: string
-    OnboardingCompleted: bool
-    MobileOnboardingCompleted: bool
-    Name: string
+    id: string
+    version: int
+    email: string
+    profile_photo: string
+    onboarding_completed: bool
+    mobile_onboarding_completed: bool
+    name: string
 }
 
 type UserSettings = {
-    Fbp: string
-    Type: string
-    Persona: string
-    ClickIds: {| Id: string; Type: string |}
-    TeamRole: string
-    TimeZone: string
-    SignupTime: int64
-    PreferredLocale: string
-    UsedAndroidApp: bool
-    UsedWindowsApp: bool
-    StartDayOfWeek: int
-    UsedDesktopWebApp: bool
-    PreferredLocaleOrigin: string
-    SeenCommentSidebarV2: bool
-    SeenFileAttachmentIntro: bool
+    fbp: string
+    ``type``: string
+    persona: string
+    click_ids: {| id: string; ``type``: string |}
+    team_role: string
+    time_zone: string
+    signup_time: int64
+    preferred_locale: string
+    used_android_app: bool
+    used_windows_app: bool
+    start_dayOf_week: int
+    used_desktop_web_app: bool
+    preferred_locale_origin: string
+    seen_comment_sidebar_v2: bool
+    seen_file_attachment_intro: bool
 }
 
 type UserSettingItem = {
-    Id: string
-    Version: int
-    Settings: UserSettings
+    id: string
+    version: int
+    settings: UserSettings
 }
 
 [<NoComparison>]
 type UserContentRecordMap = {
-    NotionUser: PermissionObjects<User>
-    UserRoot: JsonElement
-    UserSettings: PermissionObjects<UserSettingItem>
-    Space: PermissionObjects<Space>
-    SpaceView: JsonElement
-    Block: JsonElement
-    Collection: JsonElement
+    notion_user: PermissionObjects<User>
+    user_root: JsonElement
+    user_settings: PermissionObjects<UserSettingItem>
+    space_view: JsonElement
+    block: JsonElement
+    space: PermissionObjects<Space>
+    collection: JsonElement
 }
 
 [<NoComparison>]
 type UserContent = {
-    [<JsonPropertyName("recordMap")>] RecordMap: UserContentRecordMap
+    recordMap: UserContentRecordMap
 }

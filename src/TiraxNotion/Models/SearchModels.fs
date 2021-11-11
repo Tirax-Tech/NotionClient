@@ -26,17 +26,26 @@ type SearchQuery = {
     Source: string
 }
 
+// Result classes
+
 type SearchedDocument = {
-    Id: string
-    IsNavigable: bool
-    Score: double
-    SpaceId: string
-    Source: string
+    id: string
+    isNavigable: bool
+    score: double
+    spaceId: string
+    source: string
+}
+
+[<NoComparison>]
+type SearchRecordMap = {
+    block: JsonElement
+    space: PermissionObjects<Space>
+    collection: JsonElement
 }
 
 [<NoComparison>]
 type SearchResults = {
-    Results: SearchedDocument list
-    Total: int
-    RecordMap: RecordMap<RecordMapBase>
+    results: SearchedDocument list
+    total: int
+    recordMap: SearchRecordMap
 }

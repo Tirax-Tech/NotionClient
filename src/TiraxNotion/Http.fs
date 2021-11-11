@@ -47,7 +47,7 @@ let inline private respondWith ([<InlineIfLambda>] getter: HttpContent -> Task<'
 
 let DefaultCamelSerializerOptions = JsonSerializerOptions()
 
-exception HttpRequestUnhandled of HttpStatusCode * string
+exception HttpRequestUnhandled of struct (HttpStatusCode * string)
 
 /// Read content from HttpResponseMessage as JSON and deserialize to 'Response.
 // JsonSerializerOptions -> HttpResponseMessage -> Task<struct (HttpStatusCode * 'Response)>

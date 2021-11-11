@@ -18,7 +18,6 @@ NUGET
     Microsoft.CSharp (4.7) - restriction: || (== net6.0) (&& (== netstandard2.0) (>= net5.0)) (&& (== netstandard2.1) (>= net5.0))
     Microsoft.NETCore.Platforms (5.0.4) - restriction: || (== net6.0) (&& (== netstandard2.0) (>= net5.0)) (&& (== netstandard2.1) (>= net5.0))
     Microsoft.NETCore.Targets (5.0) - restriction: || (== net6.0) (&& (== netstandard2.0) (>= net5.0)) (&& (== netstandard2.1) (>= net5.0))
-    O9d.Json.Formatting (0.1)
     System.Collections (4.3) - restriction: || (== net6.0) (&& (== netstandard2.0) (>= net5.0)) (&& (== netstandard2.1) (>= net5.0))
       Microsoft.NETCore.Platforms (>= 1.1)
       Microsoft.NETCore.Targets (>= 1.1)
