@@ -4,3 +4,5 @@ storage: none
 framework: net6.0, netstandard2.0, netstandard2.1
 nuget FSharp.Core
 nuget TiraxTech.Uri
+
+gist ruxo/aaa630796ee3e60881cede10ff7024de TiraxTech.Http.fs

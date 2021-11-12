@@ -17,13 +17,16 @@
     <WarningLevel>5</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\paket-files\ruxo\aaa630796ee3e60881cede10ff7024de\TiraxTech.Http.fs">
+      <Paket>True</Paket>
+      <Link>paket-files/TiraxTech.Http.fs</Link>
+    </Compile>
     <None Include="paket.references" />
     <Compile Include="Models\RecordMap.fs" />
     <Compile Include="Models\UserContent.fs" />
     <Compile Include="Models\SearchModels.fs" />
     <Compile Include="Models\DeleteBlockModels.fs" />
     <Compile Include="Option.fs" />
-    <Compile Include="Http.fs" />
     <Compile Include="NotionClient.fs" />
   </ItemGroup>
   <ItemGroup>
