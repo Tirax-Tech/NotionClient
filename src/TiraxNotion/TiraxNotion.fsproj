@@ -21,6 +21,7 @@
     <Compile Include="Models\RecordMap.fs" />
     <Compile Include="Models\UserContent.fs" />
     <Compile Include="Models\SearchModels.fs" />
+    <Compile Include="Models\DeleteBlockModels.fs" />
     <Compile Include="Option.fs" />
     <Compile Include="Http.fs" />
     <Compile Include="NotionClient.fs" />
